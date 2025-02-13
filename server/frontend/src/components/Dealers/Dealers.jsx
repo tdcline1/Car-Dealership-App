@@ -29,7 +29,8 @@ const Dealers = () => {
 
   const get_dealers = async ()=>{
     const res = await fetch(dealer_url, {
-      method: "GET"
+      method: "GET",
+      mode: "cors"
     });
     const retobj = await res.json();
     if(retobj.status === 200) {
