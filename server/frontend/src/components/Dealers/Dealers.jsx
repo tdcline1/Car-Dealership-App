@@ -11,15 +11,13 @@ const Dealers = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [originalDealers, setOriginalDealers] = useState([]);
 
-
-  // let root_url = window.location.origin
-  let dealer_url ="/djangoapp/get_dealers";
+  const BACKEND_URL = "https://car-dealership-app-django.onrender.com";
+  let dealer_url = `${BACKEND_URL}/djangoapp/get_dealers`;
+  let dealer_url_by_state = `${BACKEND_URL}/djangoapp/get_dealers/`;
   
-  let dealer_url_by_state = "/djangoapp/get_dealers/";
  
   const filterDealers = async (state) => {
-    dealer_url_by_state = dealer_url_by_state+state;
-    const res = await fetch(dealer_url_by_state, {
+    const res = await fetch(`${dealer_url_by_state}${state}`, {
       method: "GET"
     });
     const retobj = await res.json();
@@ -29,7 +27,6 @@ const Dealers = () => {
     }
   }
 
-  // I think this is deprecated by handleinputchange and blur functions
   const get_dealers = async ()=>{
     const res = await fetch(dealer_url, {
       method: "GET"
