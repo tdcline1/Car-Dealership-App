@@ -35,6 +35,7 @@ CSRF_TRUSTED_ORIGINS = [
         "https://tdcline3-8000.theiadockernext-1-labs-prod-"
         "theiak8s-4-tor01.proxy.cognitiveclass.ai"
     ),
+    "https://car-dealership-app-django.onrender.com",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
