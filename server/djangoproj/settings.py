@@ -38,12 +38,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://car-dealership-app-django.onrender.com",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://car-dealership-app-ix.vercel.app",  # Your React frontend
-    "https://car-dealership-app-django.onrender.com",  # Django backend
-    "http://localhost:3000",  # If testing locally
-]
-
 CORS_ALLOW_ALL_ORIGINS = True  # Add this back
 
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
