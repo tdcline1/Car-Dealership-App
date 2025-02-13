@@ -13,7 +13,9 @@ app.use(require('body-parser').urlencoded({ extended: false }));
 const reviews_data = JSON.parse(fs.readFileSync("reviews.json", 'utf8'));
 const dealerships_data = JSON.parse(fs.readFileSync("dealerships.json", 'utf8'));
 
-mongoose.connect("mongodb://mongo_db:27017/",{'dbName':'dealershipsDB'});
+mongoose.connect("mongodb+srv://tdcline1:TDCis123$@cluster0.28rad.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+.then(() => console.log("Connected to MongoDB Atlas"))
+.catch(err => console.error("MongoDB connection error:", err));
 
 //Imports Mongoose models (review.js and dealership.js) for interacting with MongoDB.
 const Reviews = require('./review');
