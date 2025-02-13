@@ -44,6 +44,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # If testing locally
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True  # Add this back
 
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 CORS_ALLOW_HEADERS = ["*"]
