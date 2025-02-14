@@ -2,10 +2,12 @@ import React from 'react';
 import "../assets/style.css";
 import "../assets/bootstrap.min.css";
 
+const BACKEND_URL = "https://car-dealership-app-django.onrender.com";
+
 const Header = () => {
     const logout = async (e) => {
     e.preventDefault();
-    let logout_url = window.location.origin+"/djangoapp/logout";
+    let logout_url = BACKEND_URL+"/djangoapp/logout";
     const res = await fetch(logout_url, {
       method: "GET",
     });
@@ -47,13 +49,13 @@ if ( curr_user !== null &&  curr_user !== "") {
               <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" style={{fontSize: "larger"}} aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" style={{fontSize: "larger"}} aria-current="page" href="${BACKEND_URL}">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" style={{fontSize: "larger"}} href="/about">About Us</a>
+                    <a class="nav-link" style={{fontSize: "larger"}} href="${BACKEND_URL}/about">About Us</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" style={{fontSize: "larger"}} href="/contact">Contact Us</a>
+                    <a class="nav-link" style={{fontSize: "larger"}} href="${BACKEND_URL}/contact">Contact Us</a>
                   </li>
                 </ul>
                 <span class="navbar-text">
