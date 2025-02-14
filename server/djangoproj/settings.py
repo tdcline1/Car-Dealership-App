@@ -38,8 +38,15 @@ CSRF_TRUSTED_ORIGINS = [
     "https://car-dealership-app-django.onrender.com",
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True  # Add this back
+CORS_ALLOWED_ORIGINS = [
+    "https://car-dealership-app-ix.vercel.app",  # Your React frontend
+    "https://car-dealership-app-django.onrender.com",  # Django backend
+    "https://car-dealership-app-database.onrender.com",  # DB1
+    "https://car-dealership-app-redone.onrender.com", #Sentiment Analysis microservice
+    "http://localhost:3000",  # If testing locally
+]
 
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 CORS_ALLOW_HEADERS = ["*"]
 
