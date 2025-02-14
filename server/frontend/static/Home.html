@@ -16,29 +16,34 @@ const logout = async (e) => {
   if (json) {
     let username = sessionStorage.getItem('username');
     sessionStorage.removeItem('username');
-    checkSession();
-    window.location.href = window.location.origin;
+    alert("Logging out "+username+"...")    
     window.location.reload();
-    alert("Logging out "+username+"...")
   }
   else {
     alert("The user could not be logged out.")
   }
 };
 
-let checkSession = ()=>{
+let checkSession = () => {
   let curr_user = sessionStorage.getItem("username");
+  let loginLogoutElement = document.getElementById("loginlogout");
 
-  if (curr_user && curr_user !== "") {
-    document.getElementById("loginlogout").innerHTML = 
-    '<span class="homepage_links">' + curr_user +'</span>' +
-    '<a class="homepage_links" onclick="logout()" href="/">Logout</a>'
-  } else {
-    document.getElementById("loginlogout").innerHTML = 
-    '<a class="homepage_links" href="/login">Login</a>'+
-    '<a class="homepage_links"  href="/register">Register</a>'
+  if (loginLogoutElement) {
+    if (curr_user) {
+      loginLogoutElement.innerHTML = `<span class="homepage_links">${curr_user}</span>
+        <a class="homepage_links" onclick="logout()" href="#">Logout</a>`;
+    } else {
+      loginLogoutElement.innerHTML = `<a class="homepage_links" href="/login">Login</a>
+        <a class="homepage_links" href="/register">Register</a>`;
+    }
   }
- }
+};
+
+// Run when session storage changes (e.g., login/logout)
+window.addEventListener("storage", checkSession);
+
+// Run on page load
+window.onload = checkSession;
 </script>
 </head>
 <body onload="checkSession()">
