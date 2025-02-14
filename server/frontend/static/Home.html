@@ -16,6 +16,7 @@ const logout = async (e) => {
   if (json) {
     let username = sessionStorage.getItem('username');
     sessionStorage.removeItem('username');
+    checkSession();
     window.location.href = window.location.origin;
     window.location.reload();
     alert("Logging out "+username+"...")
