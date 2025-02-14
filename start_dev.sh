@@ -28,6 +28,17 @@ python3 manage.py makemigrations
 python3 manage.py migrate --run-syncdb
 python3 manage.py runserver &
 
-echo "Opening Django app in browser..."
-sleep 5  # Give the server time to start
-xdg-open http://127.0.0.1:8000/ 2>/dev/null || open http://127.0.0.1:8000/ 2>/dev/null || start http://127.0.0.1:8000/
+while ! nc -z 127.0.0.1 8000; do   
+  sleep 1  # Check every second
+done
+
+echo "Django server is running! Opening browser..."
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    xdg-open http://127.0.0.1:8000/ 2>/dev/null
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    open http://127.0.0.1:8000/ 2>/dev/null
+elif [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* ]]; then
+    cmd.exe /c start http://127.0.0.1:8000/
+else
+    echo "Unsupported OS: Please open http://127.0.0.1:8000/ manually"
+fi
