@@ -36,10 +36,12 @@ let checkSession = async () => {
     const data = await res.json();
 
     if (data.authenticated) {
+      sessionStorage.setItem("username", json.username);
       loginLogoutElement.innerHTML = `
         <span class="homepage_links">${data.username}</span>
         <a class="homepage_links" onclick="logout()" href="#">Logout</a>`;
     } else {
+      sessionStorage.removeItem("username");
       loginLogoutElement.innerHTML = `
         <a class="homepage_links" href="/login">Login</a>
         <a class="homepage_links" href="/register">Register</a>`;
