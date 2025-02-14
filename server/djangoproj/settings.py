@@ -35,7 +35,11 @@ CSRF_TRUSTED_ORIGINS = [
         "https://tdcline3-8000.theiadockernext-1-labs-prod-"
         "theiak8s-4-tor01.proxy.cognitiveclass.ai"
     ),
-    "https://car-dealership-app-django.onrender.com",
+    "https://car-dealership-app-ix.vercel.app",  # Your React frontend
+    "https://car-dealership-app-django.onrender.com",  # Django backend
+    "https://car-dealership-app-database.onrender.com",  # DB1
+    "https://car-dealership-app-redone.onrender.com", #Sentiment Analysis microservice
+    "http://localhost:3000",  # If testing locally
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -49,6 +53,10 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 CORS_ALLOW_HEADERS = ["*"]
+SESSION_COOKIE_SAMESITE = "None"  # Allow cross-site cookies
+SESSION_COOKIE_SECURE = True  # Required for SameSite=None
+CSRF_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SECURE = True
 CORS_ALLOW_HEADERS = [
     "accept",
     "accept-encoding",
