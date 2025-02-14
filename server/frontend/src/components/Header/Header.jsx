@@ -5,7 +5,7 @@ import "../assets/bootstrap.min.css";
 const BACKEND_URL = "https://car-dealership-app-django.onrender.com";
 
 const Header = () => {
-  const [currUser, setCurrUser] = useState(null);
+  const [currUser, setCurrUser] = useState(sessionStorage.getItem("username") || null);
 
   // Function to check session with Django
   const checkAuth = async () => {
@@ -17,14 +17,15 @@ const Header = () => {
 
       const json = await res.json();
       if (json.isAuthenticated) {
-        setCurrUser(json.username); // Update React state
         sessionStorage.setItem("username", json.username);
+        setCurrUser(json.username); // ✅ Update React state
       } else {
-        setCurrUser(null);
         sessionStorage.removeItem("username");
+        setCurrUser(null);
       }
     } catch (error) {
       console.error("Error checking auth:", error);
+      sessionStorage.removeItem("username");
       setCurrUser(null);
     }
   };
@@ -52,7 +53,7 @@ const Header = () => {
     }
   };
 
-  // Check session on component mount
+  // ✅ Run checkAuth() on mount and when sessionStorage changes
   useEffect(() => {
     checkAuth();
   }, []);
