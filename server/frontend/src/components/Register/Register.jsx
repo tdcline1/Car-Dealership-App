@@ -29,6 +29,7 @@ const Register = () => {
         headers: {
             "Content-Type": "application/json",
         },
+        credentials: "include",  // cookies sent with the request
         body: JSON.stringify({
             "userName": userName,
             "password": password,

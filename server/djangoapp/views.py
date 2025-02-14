@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .models import CarMake, CarModel
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate, logout
+from django.middleware.csrf import get_token
 import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -66,6 +67,7 @@ def registration(request):
     # context = {}
     data = json.loads(request.body)
     username = data['userName']
+    print(username)
     password = data['password']
     first_name = data['firstName']
     last_name = data['lastName']
@@ -89,10 +91,16 @@ def registration(request):
             password=password,
             email=email
         )
+        user = authenticate(username=username, password=password)
         # Login the user and redirect to list page
         login(request, user)
-        data = {"userName": username, "status": "Authenticated"}
-        return JsonResponse(data)
+        request.session['user_id'] = user.id  # Explicitly set session data
+        response = JsonResponse({"userName": username, "status": "Authenticated"})
+
+        # Ensure CSRF token is sent for future requests
+        response.set_cookie('csrftoken', get_token(request), httponly=False)
+        
+        return response
     else:
         data = {"userName": username, "error": "Already Registered"}
         return JsonResponse(data)
