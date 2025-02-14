@@ -36,7 +36,7 @@ let checkSession = async () => {
     const data = await res.json();
 
     if (data.authenticated) {
-      sessionStorage.setItem("username", json.username);
+      sessionStorage.setItem("username", data.username);
       loginLogoutElement.innerHTML = `
         <span class="homepage_links">${data.username}</span>
         <a class="homepage_links" onclick="logout()" href="#">Logout</a>`;
