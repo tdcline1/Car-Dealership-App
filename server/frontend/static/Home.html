@@ -24,18 +24,27 @@ const logout = async (e) => {
   }
 };
 
-let checkSession = () => {
-  let curr_user = sessionStorage.getItem("username");
+let checkSession = async () => {
   let loginLogoutElement = document.getElementById("loginlogout");
 
-  if (loginLogoutElement) {
-    if (curr_user) {
-      loginLogoutElement.innerHTML = `<span class="homepage_links">${curr_user}</span>
+  try {
+    const res = await fetch("/djangoapp/check-auth", {
+      method: "GET",
+      credentials: "include"  // Ensures cookies are sent
+    });
+    const data = await res.json();
+
+    if (data.authenticated) {
+      loginLogoutElement.innerHTML = `
+        <span class="homepage_links">${data.username}</span>
         <a class="homepage_links" onclick="logout()" href="#">Logout</a>`;
     } else {
-      loginLogoutElement.innerHTML = `<a class="homepage_links" href="/login">Login</a>
+      loginLogoutElement.innerHTML = `
+        <a class="homepage_links" href="/login">Login</a>
         <a class="homepage_links" href="/register">Register</a>`;
     }
+  } catch (error) {
+    console.error("Error checking session:", error);
   }
 };
 

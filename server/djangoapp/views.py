@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .models import CarMake, CarModel
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from django.middleware.csrf import get_token
 import logging
 import json
@@ -21,6 +22,10 @@ from .restapis import (
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
+def check_auth(request):
+    if request.user.is_authenticated:
+        return JsonResponse({"authenticated": True, "username": request.user.username})
+    return JsonResponse({"authenticated": False})
 
 # Create your views here.
 def get_cars(request):
