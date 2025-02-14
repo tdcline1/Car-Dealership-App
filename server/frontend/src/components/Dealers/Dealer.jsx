@@ -16,13 +16,15 @@ const Dealer = () => {
   const [unreviewed, setUnreviewed] = useState(false);
   const [postReview, setPostReview] = useState(<></>)
 
-  let curr_url = window.location.href;
-  let root_url = curr_url.substring(0,curr_url.indexOf("dealer"));
+  const BACKEND_URL = "https://car-dealership-app-django.onrender.com";
+
+  // let curr_url = window.location.href;
+  // let root_url = curr_url.substring(0,curr_url.indexOf("dealer"));
   let params = useParams();
   let id =params.id;
-  let dealer_url = root_url+`djangoapp/dealer/${id}`;
-  let reviews_url = root_url+`djangoapp/reviews/dealer/${id}`;
-  let post_review = root_url+`postreview/${id}`;
+  let dealer_url = `${BACKEND_URL}/djangoapp/dealer/${id}`;
+  let reviews_url = `${BACKEND_URL}/djangoapp/reviews/dealer/${id}`;
+  let post_review = `${BACKEND_URL}/postreview/${id}`;
   
   const get_dealer = async ()=>{
     const res = await fetch(dealer_url, {
