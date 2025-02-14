@@ -28,8 +28,8 @@ python3 manage.py makemigrations
 python3 manage.py migrate --run-syncdb
 python3 manage.py runserver &
 
-while ! nc -z 127.0.0.1 8000; do   
-  sleep 1  # Check every second
+while ! curl -s http://127.0.0.1:8000/ > /dev/null; do
+  sleep 1
 done
 
 echo "Django server is running! Opening browser..."
