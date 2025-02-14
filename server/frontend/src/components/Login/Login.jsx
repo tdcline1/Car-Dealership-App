@@ -9,7 +9,8 @@ const Login = ({ onClose }) => {
   const [password, setPassword] = useState("");
   const [open,setOpen] = useState(true)
 
-  let login_url = window.location.origin+"/djangoapp/login";
+  const BACKEND_URL = "https://car-dealership-app-django.onrender.com";
+  let login_url = BACKEND_URL+"/djangoapp/login";
 
   const login = async (e) => {
     e.preventDefault();
@@ -63,7 +64,7 @@ const Login = ({ onClose }) => {
               <input className="action_button" type="submit" value="Login"/>
               <input className="action_button" type="button" value="Cancel" onClick={()=>setOpen(false)}/>
               </div>
-              <a className="loginlink" href="/register">Register Now</a>
+              <a className="loginlink" href="${BACKEND_URL}/register">Register Now</a>
           </form>
       </div>
     </div>
