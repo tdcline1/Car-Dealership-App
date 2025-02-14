@@ -13,15 +13,16 @@ const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setlastName] = useState("");
 
+  const BACKEND_URL = "https://car-dealership-app-django.onrender.com";
 
   const gohome = ()=> {
-    window.location.href = window.location.origin;
+    window.location.href = BACKEND_URL;
   }
 
   const register = async (e) => {
     e.preventDefault();
 
-    let register_url = window.location.origin+"/djangoapp/register";
+    let register_url = BACKEND_URL+"/djangoapp/register";
     
     const res = await fetch(register_url, {
         method: "POST",
@@ -40,11 +41,11 @@ const Register = () => {
     const json = await res.json();
     if (json.status) {
         sessionStorage.setItem('username', json.userName);
-        window.location.href = window.location.origin;
+        window.location.href = BACKEND_URL;
     }
     else if (json.error === "Already Registered") {
       alert("The user with same username is already registered");
-      window.location.href = window.location.origin;
+      window.location.href = BACKEND_URL;
     }
 };
 
