@@ -35,7 +35,6 @@ app.get('/', async (req, res) => {
 });
 
 
-
 app.get('/cars/:id', async (req, res) => {
   try {
     const documents = await Cars.find({dealer_id: req.params.id});
