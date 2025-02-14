@@ -64,7 +64,7 @@ const Login = ({ onClose }) => {
               <input className="action_button" type="submit" value="Login"/>
               <input className="action_button" type="button" value="Cancel" onClick={()=>setOpen(false)}/>
               </div>
-              <a className="loginlink" href="${BACKEND_URL}/register">Register Now</a>
+              <a className="loginlink" href={`${BACKEND_URL}/register`}>Register Now</a>
           </form>
       </div>
     </div>
