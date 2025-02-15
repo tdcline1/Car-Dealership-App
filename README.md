@@ -1,8 +1,12 @@
-# Car Dealership App
+# Car Dealership App  🚙
 
 ## Overview
 
-This car dealership app allows users to access dealership reviews and inventory, featuring a combination of Django for the backend, React for dynamic frontend components, and multiple microservices for efficient data handling.
+This Car Dealership App enables users to browse dealership reviews and inventory. It leverages:
+- Django as the main backend framework
+- Node.js, Express, and MongoDB for backend database storage and access
+- React for dynamic frontend components
+- A Sentiment Analysis microservice to analyze and diagnose customer reviews
 
 ## Features
 
@@ -12,10 +16,10 @@ This car dealership app allows users to access dealership reviews and inventory,
 
   - Django templates for the home screen and basic company info
   - Django views, routing, and a REST API proxy service (using the `requests` library) to manipulate data and handle requests
-  - User authentication and authorization with Django's user management system
+  - User authentication and authorization with Django's user management system (django.contrib.auth module)
   - Admin page for manual object additions
 
-- **Microservices (Node.js + Express + MongoDB)**
+- **Backend Microservices (Node.js + Express + MongoDB)**
 
   - Two backend microservices:
     1. **Dealer Service**: Fetches dealership details and reviews
@@ -30,10 +34,10 @@ This car dealership app allows users to access dealership reviews and inventory,
 ### Frontend
 
 - **React-Based UI**
-  - Login and registration system
-  - Dealer details view (including customer reviews)
-  - Dealers list view (filtered by state search box)
-  - Search cars component (filter inventory by make, model, mileage, price, and year)
+  - Login and registration components
+  - Dealer details component (including customer reviews with sentiment analysis integration)
+  - Dealers list component (filtered by state search box)
+  - Search cars component (filter a dealer's inventory by make, model, mileage, price, and year)
   - Post review form with sentiment analysis integration
   - Navbar for easy navigation
   - Bootstrap for styling
@@ -43,41 +47,17 @@ This car dealership app allows users to access dealership reviews and inventory,
 - Each backend service is **containerized** using Docker
 - CI/CD pipeline using **GitHub Actions** for automated linting and workflow validation
 - Option to deploy the entire application in **Kubernetes** for container orchestration
+- Automated API testing
 
 ## Installation & Setup
 
-### Local Development
+### Use the app on GitHub Codespaces- It's super easy!
 
-1. Clone the repository:
+1. **Create a codespace** on the main branch
+
+2. **Run the startup script** (takes about 2 minutes to get the full project running):
    ```sh
-   git clone https://github.com/tdcline1/Car-Dealership-App.git
+   Chmod +x start_dev.sh
+   ./start_dev.sh
    ```
-2. Set up the backend services:
-   ```sh
-   cd server/database
-   docker-compose up
-   ```
-3. Run the Django server:
-   ```sh
-   cd ../
-   virtualenv djangoenv
-   source djangoenv/bin/activate
-   pip install -r requirements.txt
-   python manage.py migrate
-   python manage.py runserver
-   ```
-4. Start the React frontend:
-   ```sh
-   cd ../frontend
-   npm install
-   npm start
-   ```
-
-## Deployment
-
-The microservices and frontend can be deployed using **Render**, **Railway**, **IBM Code Engine**, or **Vercel**.
-
-Would you like help automating the deployment process? 🚀
-
-How do i get it to maintain your format on github?
-
+3. **Open the app** running on **port 8000**
