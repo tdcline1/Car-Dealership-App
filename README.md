@@ -47,37 +47,5 @@ This car dealership app allows users to access dealership reviews and inventory,
 ## Installation & Setup
 
 ### Local Development
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/tdcline1/Car-Dealership-App.git
-   ```
-2. Set up the backend services:
-   ```sh
-   cd server/database
-   docker-compose up
-   ```
-3. Run the Django server:
-   ```sh
-   cd ../
-   virtualenv djangoenv
-   source djangoenv/bin/activate
-   pip install -r requirements.txt
-   python manage.py migrate
-   python manage.py runserver
-   ```
-4. Start the React frontend:
-   ```sh
-   cd ../frontend
-   npm install
-   npm start
-   ```
-
-## Deployment
-
-The microservices and frontend can be deployed using **Render**, **Railway**, **IBM Code Engine**, or **Vercel**.
-
-Would you like help automating the deployment process? 🚀
-
-How do i get it to maintain your format on github?
+ visit here: https://car-dealership-app-django.onrender.com 
 
