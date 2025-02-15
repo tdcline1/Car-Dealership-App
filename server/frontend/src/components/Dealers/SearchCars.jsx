@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+// navbar component is always rendered on top of the page
 import Header from '../Header/Header';
 
 const SearchCars = () => {
+  // State to hold the list of cars to be displayed
   const [cars, setCars] = useState([]);
+  // State to hold unique car makes and models extracted from the above car list for filtering
   const [makes, setMakes] = useState([]);
   const [models, setModels] = useState([]);
   const [dealer, setDealer] = useState({"full_name":""});
+  // State to hold messages while there are no query results ("Loading Cars...." or "No cars found...")
   const [message, setMessage] = useState("Loading Cars....");
   const { id } = useParams();
-
 
   let dealer_url = `/djangoapp/get_inventory/${id}`;
 
   let fetch_url = `/djangoapp/dealer/${id}`;
   
+  // Fetch dealer information from the backend
   const fetchDealer = async ()=>{
     const res = await fetch(fetch_url, {
       method: "GET"
@@ -26,6 +30,7 @@ const SearchCars = () => {
     }
   }
 
+  // Function to extract unique makes and models from the fetched cars array
   const populateMakesAndModels = (cars)=>{
     let tmpmakes = []
     let tmpmodels = []
@@ -37,7 +42,7 @@ const SearchCars = () => {
     setModels(Array.from(new Set(tmpmodels)));
   }
     
-
+  // Fetch all cars (inventory) for the dealer from the backend
   const fetchCars = async ()=>{
     const res = await fetch(dealer_url, {
       method: "GET"
@@ -51,16 +56,19 @@ const SearchCars = () => {
     }
   }
 
+  // Function to filter cars matching selected criteria based on various dropdowns. Only called after dropdown is selected
   const setCarsmatchingCriteria = async(matching_cars)=>{
     let cars = Array.from(matching_cars)
     console.log("Number of matching cars "+cars.length);
 
+    // Get the selected indices from each filter dropdown
     let makeIdx = document.getElementById('make').selectedIndex;
     let modelIdx = document.getElementById('model').selectedIndex;
     let yearIdx = document.getElementById('year').selectedIndex;
     let mileageIdx = document.getElementById('mileage').selectedIndex;
     let priceIdx = document.getElementById('price').selectedIndex;
 
+    // Filter by make, model, year, mileage or price only if a specific option in the dropdown is selected (index 0 is all)
     if(makeIdx !== 0) {
       let currmake = document.getElementById('make').value;
       cars = cars.filter(car => car.make === currmake);
@@ -72,7 +80,6 @@ const SearchCars = () => {
         document.getElementById('make').value = cars[0].make;
       }
     }
-
     if(yearIdx !== 0) {
       let curryear = document.getElementById('year').value;
       cars = cars.filter(car => car.year >= curryear);
@@ -80,7 +87,6 @@ const SearchCars = () => {
         document.getElementById('make').value = cars[0].make;
       }
     }
-
     if(mileageIdx !== 0) {
       let currmileage = parseInt(document.getElementById('mileage').value);
       if(currmileage === 50000) {
@@ -95,7 +101,6 @@ const SearchCars = () => {
         cars = cars.filter(car => car.mileage > 200000);
       }
     }
-
     if(priceIdx !== 0) {
       let currprice = parseInt(document.getElementById('price').value);
       if(currprice === 20000) {
@@ -117,7 +122,7 @@ const SearchCars = () => {
     setCars(cars);
   }
 
-  
+  // Function to search cars by make, triggered when the make dropdown changes
   let SearchCarsByMake = async ()=> {
     let make = document.getElementById("make").value;
     dealer_url = dealer_url + "?make="+make;
@@ -135,6 +140,7 @@ const SearchCars = () => {
       }
   }
 
+   // Function to search cars by model, triggered when the model dropdown changes
    let SearchCarsByModel = async ()=> {
     let model = document.getElementById("model").value;
     dealer_url = dealer_url + "?model="+model;
@@ -152,6 +158,7 @@ const SearchCars = () => {
       }
   }
 
+  // Function to search cars by year, triggered when the year dropdown changes
   let SearchCarsByYear = async ()=> {
     let year = document.getElementById("year").value;
     if (year !== "all") {
@@ -171,6 +178,7 @@ const SearchCars = () => {
       }
   }
 
+  // Function to search cars by mileage, triggered when the mileage dropdown changes
   let SearchCarsByMileage = async ()=> {
     
     let mileage = document.getElementById("mileage").value;
@@ -191,7 +199,7 @@ const SearchCars = () => {
       }
   }
 
-
+  // Function to search cars by price, triggered when the price dropdown changes
   let SearchCarsByPrice = async ()=> {
     let price = document.getElementById("price").value;
     if(price !== "all") {
@@ -211,6 +219,7 @@ const SearchCars = () => {
       }
   }
 
+  // Reset function to clear all dropdown selections and fetch the full list of cars again
   const reset = ()=>{
     const selectElements = document.querySelectorAll('select');
 

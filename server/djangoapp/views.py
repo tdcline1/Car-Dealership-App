@@ -22,7 +22,7 @@ from .restapis import (
 logger = logging.getLogger(__name__)
 
 
-# Create your views here.
+# This view retrieves the list of car models along with their makes.
 def get_cars(request):
     count = CarMake.objects.filter().count()
     print(count)
@@ -36,7 +36,7 @@ def get_cars(request):
     return JsonResponse({"CarModels": cars})
 
 
-# Create a `login_request` view to handle sign in request
+# This view handles user login (authentication) requests.
 @csrf_exempt
 def login_user(request):
     # Get username and password from request.POST dictionary
@@ -53,14 +53,14 @@ def login_user(request):
     return JsonResponse(data)
 
 
-# Create a `logout_request` view to handle sign out request
+# This view handles user logout requests.
 def logout_request(request):
     logout(request)
     data = {"userName": ""}
     return JsonResponse(data)
 
 
-# Create a `registration` view to handle sign up request
+# This view handles new user registration (sign up).
 @csrf_exempt
 def registration(request):
     # context = {}
@@ -108,7 +108,7 @@ def get_dealerships(request, state="All"):
     return JsonResponse({"status": 200, "dealers": dealerships})
 
 
-# Create a `get_dealer_reviews` view to render the reviews of a dealer
+# render the reviews of a dealer
 def get_dealer_reviews(request, dealer_id):
     # if dealer id has been provided
     if (dealer_id):
@@ -123,7 +123,7 @@ def get_dealer_reviews(request, dealer_id):
         return JsonResponse({"status": 400, "message": "Bad Request"})
 
 
-# Create a `get_dealer_details` view to render the dealer details
+# render the dealer details
 def get_dealer_details(request, dealer_id):
     if (dealer_id):
         endpoint = "/fetchDealer/"+str(dealer_id)
@@ -133,7 +133,7 @@ def get_dealer_details(request, dealer_id):
         return JsonResponse({"status": 400, "message": "Bad Request"})
 
 
-# Create a `add_review` view to submit a review
+# submit a review
 def add_review(request):
     if not request.user.is_anonymous:
         data = json.loads(request.body)
@@ -149,7 +149,7 @@ def add_review(request):
         return JsonResponse({"status": 403, "message": "Unauthorized"})
 
 
-# Code for the view
+# This view retrieves a list of cars (inventory) for a dealer based on provided filters.
 def get_inventory(request, dealer_id):
     data = request.GET
     if (dealer_id):

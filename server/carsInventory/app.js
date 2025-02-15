@@ -11,15 +11,20 @@ const port = 3050;
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
+// Read and parse car records from JSON file so we can later populate the database
 const carsData = JSON.parse(fs.readFileSync('car_records.json', 'utf8'));
 
+// Connect to MongoDB using Mongoose. Connects to a MongoDB instance running on 'mongo_db' at port 27017,
+// and specifies 'dealershipsDB' as the database to use.
 mongoose.connect('mongodb://mongo_db:27017/', { dbName: 'dealershipsDB' })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
 
+// Import the Cars model from the 'inventory' module (which defines the schema for car documents)
 const Cars = require('./inventory');
 
+// populate the database
 try {
 
   Cars.deleteMany({}).then(() => {
@@ -35,6 +40,8 @@ app.get('/', async (req, res) => {
 });
 
 
+// Route: GET /cars/:id
+// Fetch car records based on the dealer ID provided in the URL parameter.
 app.get('/cars/:id', async (req, res) => {
   try {
     const documents = await Cars.find({dealer_id: req.params.id});
@@ -44,6 +51,9 @@ app.get('/cars/:id', async (req, res) => {
   }
 });
 
+
+// Route: GET /carsbymake/:id/:make
+// Fetch car records for a specific dealer and car make.
 app.get('/carsbymake/:id/:make', async (req, res) => {
   try {
     const documents = await Cars.find({dealer_id: req.params.id, make: req.params.make});
@@ -53,6 +63,9 @@ app.get('/carsbymake/:id/:make', async (req, res) => {
   }
 });
 
+
+// Route: GET /carsbymodel/:id/:model
+// Fetch car records for a specific dealer and car model.
 app.get('/carsbymodel/:id/:model', async (req, res) => {
   try {
     const documents = await Cars.find({ dealer_id: req.params.id, model: req.params.model });
@@ -62,6 +75,9 @@ app.get('/carsbymodel/:id/:model', async (req, res) => {
   }
 });
 
+
+// Route: GET /carsbymaxmileage/:id/:mileage
+// Fetch car records filtered by a mileage range for a specific dealer.
 app.get('/carsbymaxmileage/:id/:mileage', async (req, res) => {
   try {
     let mileage = parseInt(req.params.mileage)
@@ -84,7 +100,8 @@ app.get('/carsbymaxmileage/:id/:mileage', async (req, res) => {
   }
 });
 
-
+// Route: GET /carsbyprice/:id/:price
+// Fetch car records filtered by a price range for a specific dealer.
 app.get('/carsbyprice/:id/:price', async (req, res) => {
     try {
         let price = parseInt(req.params.price)
@@ -109,7 +126,8 @@ app.get('/carsbyprice/:id/:price', async (req, res) => {
 });
 
 
-
+// Route: GET /carsbyyear/:id/:year
+// Fetch car records for a specific dealer with a year greater than or equal to the provided year.
 app.get('/carsbyyear/:id/:year', async (req, res) => {
   try {
     const documents = await Cars.find({ dealer_id: req.params.id, year : { $gte :req.params.year }});
@@ -119,6 +137,7 @@ app.get('/carsbyyear/:id/:year', async (req, res) => {
   }
 });
 
+// Start the server and listen on the specified port
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

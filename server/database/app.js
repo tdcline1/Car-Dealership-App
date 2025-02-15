@@ -13,6 +13,7 @@ app.use(require('body-parser').urlencoded({ extended: false }));
 const reviews_data = JSON.parse(fs.readFileSync("reviews.json", 'utf8'));
 const dealerships_data = JSON.parse(fs.readFileSync("dealerships.json", 'utf8'));
 
+// Connect to the MongoDB database, specifying the database name 'dealershipsDB'
 mongoose.connect("mongodb://mongo_db:27017/",{'dbName':'dealershipsDB'});
 
 //Imports Mongoose models (review.js and dealership.js) for interacting with MongoDB.

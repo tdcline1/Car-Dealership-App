@@ -2,8 +2,10 @@ import requests
 import os
 from dotenv import load_dotenv
 
+# Load environment variables from the .env file
 load_dotenv()
 
+# Retrieve the URLs from environment variables
 backend_url = os.getenv(
     'backend_url', default="http://localhost:3030")
 sentiment_analyzer_url = os.getenv(
@@ -14,6 +16,7 @@ searchcars_url = os.getenv(
     default="http://localhost:3050/")
 
 
+# Perform a standard GET request to the backend API with optional query parameters.
 def get_request(endpoint, **kwargs):
     params = ""
     if (kwargs):
@@ -31,6 +34,7 @@ def get_request(endpoint, **kwargs):
         print(f"Error: {e}")
 
 
+# Analyze the sentiment of a review text by calling the sentiment analyzer API.
 def analyze_review_sentiments(text):
     request_url = sentiment_analyzer_url+"analyze/"+text
     try:
@@ -42,6 +46,7 @@ def analyze_review_sentiments(text):
         print("Network exception occurred")
 
 
+# Post a review to the backend API.
 def post_review(data_dict):
     request_url = backend_url+"/insert_review"
     try:
@@ -52,6 +57,7 @@ def post_review(data_dict):
         print(f"Error: {e}")
 
 
+# Perform a GET request to the car inventory API with optional query parameters.
 def searchcars_request(endpoint, **kwargs):
     params = ""
     if (kwargs):

@@ -17,6 +17,7 @@ const Dealers = () => {
   
   let dealer_url_by_state = "/djangoapp/get_dealers/";
  
+  // Function to fetch and filter dealers by a specific state
   const filterDealers = async (state) => {
     dealer_url_by_state = dealer_url_by_state+state;
     const res = await fetch(dealer_url_by_state, {
@@ -29,7 +30,7 @@ const Dealers = () => {
     }
   }
 
-  // I think this is deprecated by handleinputchange and blur functions
+  // Function to fetch all dealers from the backend API
   const get_dealers = async ()=>{
     const res = await fetch(dealer_url, {
       method: "GET"
@@ -53,6 +54,7 @@ const Dealers = () => {
     get_dealers();
   },[]);  
 
+  // Function to handle changes in the state search box
   const handleInputChange = (event) => {
     const query = event.target.value;
     setSearchQuery(query);
@@ -62,6 +64,7 @@ const Dealers = () => {
     setDealersList(filtered);
     };
 
+  // Function to restore the full list if the search input loses focus without a query
   const handleLostFocus = () => {
     if (!searchQuery) {
     setDealersList(originalDealers);

@@ -1,29 +1,35 @@
 import React, { useState,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
+// Import CSS files for styling
 import "./Dealers.css";
 import "../assets/style.css";
+
+// Import images for sentiment icons and review button
 import positive_icon from "../assets/positive.png"
 import neutral_icon from "../assets/neutral.png"
 import negative_icon from "../assets/negative.png"
 import review_icon from "../assets/reviewbutton.png"
+
 import Header from '../Header/Header';
 
 const Dealer = () => {
-
-
   const [dealer, setDealer] = useState({});
   const [reviews, setReviews] = useState([]);
   const [unreviewed, setUnreviewed] = useState(false);
   const [postReview, setPostReview] = useState(<></>)
 
   let curr_url = window.location.href;
+  // Extract the root URL by removing the part starting from "dealer"
   let root_url = curr_url.substring(0,curr_url.indexOf("dealer"));
+  // Extract URL parameters (e.g., dealer id) using useParams hook
   let params = useParams();
   let id =params.id;
   let dealer_url = root_url+`djangoapp/dealer/${id}`;
   let reviews_url = root_url+`djangoapp/reviews/dealer/${id}`;
   let post_review = root_url+`postreview/${id}`;
   
+  // Asynchronous function to fetch dealer information from the backend
   const get_dealer = async ()=>{
     const res = await fetch(dealer_url, {
       method: "GET"
@@ -36,6 +42,7 @@ const Dealer = () => {
     }
   }
 
+  // Asynchronous function to fetch reviews for the dealer from the backend
   const get_reviews = async ()=>{
     const res = await fetch(reviews_url, {
       method: "GET"
@@ -51,6 +58,7 @@ const Dealer = () => {
     }
   }
 
+  // Function to determine which sentiment icon to display based on the sentiment value
   const senti_icon = (sentiment)=>{
     let icon = sentiment === "positive"?positive_icon:sentiment==="negative"?negative_icon:neutral_icon;
     return icon;
@@ -60,9 +68,8 @@ const Dealer = () => {
     get_dealer();
     get_reviews();
     if(sessionStorage.getItem("username")) {
+      // If logged in, set the postReview state to include a link with a review button icon
       setPostReview(<a href={post_review}><img src={review_icon} style={{width:'10%',marginLeft:'10px',marginTop:'10px'}} alt='Post Review'/></a>)
-
-      
     }
   },[]);  
 
