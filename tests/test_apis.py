@@ -2,8 +2,8 @@ import requests
 
 # Make port visibility public
 # Replace below URLs with GitHub Codespace forwarded URLs
-DEALER_NODE_API_URL = "https://friendly-giggle-r44gjqwqjjxwfxj7-3030.app.github.dev" # noqa: E501
-CARS_NODE_API_URL = "https://friendly-giggle-r44gjqwqjjxwfxj7-3050.app.github.dev" # noqa: E501
+DEALER_NODE_API_URL = "https://friendly-giggle-r44gjqwqjjxwfxj7-3030.app.github.dev"  # noqa: E501
+CARS_NODE_API_URL = "https://friendly-giggle-r44gjqwqjjxwfxj7-3050.app.github.dev"  # noqa: E501
 
 
 def test_dealer_mongodb_api():
