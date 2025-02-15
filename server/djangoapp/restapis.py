@@ -16,7 +16,7 @@ searchcars_url = os.getenv(
     default="http://localhost:3050/")
 
 
-# Perform a standard GET request to the backend API with optional query parameters.
+# Perform standard GET request to backend API with optional query parameters
 def get_request(endpoint, **kwargs):
     params = ""
     if (kwargs):
@@ -57,7 +57,7 @@ def post_review(data_dict):
         print(f"Error: {e}")
 
 
-# Perform a GET request to the car inventory API with optional query parameters.
+# Perform GET request to car inventory API with optional query parameters
 def searchcars_request(endpoint, **kwargs):
     params = ""
     if (kwargs):

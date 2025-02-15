@@ -149,7 +149,7 @@ def add_review(request):
         return JsonResponse({"status": 403, "message": "Unauthorized"})
 
 
-# This view retrieves a list of cars (inventory) for a dealer based on provided filters.
+# View retrieves list of cars in a dealer's inventory based on provided filters
 def get_inventory(request, dealer_id):
     data = request.GET
     if (dealer_id):
