@@ -593,6 +593,17 @@
       "car_make": "Maybach",
       "car_model": "57",
       "car_year": 2012
+    },
+    {
+      "id": 55,
+      "name": "Albrecht Collen",
+      "dealership": 1,
+      "review": "It was ok. A bit pushy",
+      "purchase": true,
+      "purchase_date": "10/10/2020",
+      "car_make": "Lexus",
+      "car_model": "IS F",
+      "car_year": 2009
     }
   ]
 }
