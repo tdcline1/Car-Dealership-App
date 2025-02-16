@@ -6,7 +6,7 @@
       "bodyType": "SUV",
       "year": 2023,
       "dealer_id": 1,
-      "mileage": 15000,
+      "mileage": 12000,
       "price": 30000
     },
     {
@@ -1086,8 +1086,8 @@
       "bodyType": "SUV",
       "year": 2022,
       "dealer_id": 1,
-      "mileage": 22000,
-      "price": 30000
+      "mileage": 24000,
+      "price": 28000
     },
     {
       "make": "Kia",
@@ -1536,8 +1536,8 @@
       "bodyType": "SUV",
       "year": 2022,
       "dealer_id": 1,
-      "mileage": 22000,
-      "price": 30000
+      "mileage": 26000,
+      "price": 22000
     },
     {
       "make": "Kia",
@@ -1693,6 +1693,15 @@
       "price": 70000
     },
     {
+      "make": "Audi",
+      "model": "Q3",
+      "bodyType": "SUV",
+      "year": 2020,
+      "dealer_id": 1,
+      "mileage": 40000,
+      "price": 70000
+    },
+    {
       "make": "Mercedes",
       "model": "GLC",
       "bodyType": "SUV",
@@ -1736,6 +1745,15 @@
       "dealer_id": 26,
       "mileage": 6000,
       "price": 70000
+    },
+    {
+      "make": "Audi",
+      "model": "S5",
+      "bodyType": "Coupe",
+      "year": 2023,
+      "dealer_id": 26,
+      "mileage": 10000,
+      "price": 65000
     },
     {
       "make": "Mercedes",
@@ -1783,6 +1801,15 @@
       "price": 70000
     },
     {
+      "make": "Audi",
+      "model": "A3",
+      "bodyType": "Hatchback",
+      "year": 2022,
+      "dealer_id": 1,
+      "mileage": 40000,
+      "price": 55000
+    },
+    {
       "make": "Mercedes",
       "model": "E-Class",
       "bodyType": "Sedan",
@@ -1826,6 +1853,15 @@
       "dealer_id": 28,
       "mileage": 5000,
       "price": 70000
+    },
+    {
+      "make": "Audi",
+      "model": "Q7",
+      "bodyType": "SUV",
+      "year": 2021,
+      "dealer_id": 1,
+      "mileage": 50000,
+      "price": 60000
     },
     {
       "make": "Mercedes",
@@ -1873,6 +1909,15 @@
       "price": 70000
     },
     {
+      "make": "Audi",
+      "model": "A5",
+      "bodyType": "Convertible",
+      "year": 2020,
+      "dealer_id": 1,
+      "mileage": 60000,
+      "price": 40000
+    },
+    {
       "make": "Mercedes",
       "model": "GLS",
       "bodyType": "SUV",
@@ -1914,6 +1959,15 @@
       "bodyType": "Convertible",
       "year": 2023,
       "dealer_id": 30,
+      "mileage": 10000,
+      "price": 70000
+    },
+    {
+      "make": "Audi",
+      "model": "TT",
+      "bodyType": "Convertible",
+      "year": 2023,
+      "dealer_id": 4,
       "mileage": 10000,
       "price": 70000
     },

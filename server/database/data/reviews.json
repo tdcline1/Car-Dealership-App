@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Berkly Shepley",
       "dealership": 15,
-      "review": "Total grid-enabled service-desk",
+      "review": "Friendly and helpful service-desk",
       "purchase": true,
       "purchase_date": "07/11/2020",
       "car_make": "Audi",
@@ -549,6 +549,50 @@
       "car_make": "Cadillac",
       "car_model": "DeVille",
       "car_year": 1995
+    },
+    {
+      "id": 51,
+      "name": "Sherwood Brogan",
+      "dealership": 1,
+      "review": "Friendly and helpful service desk",
+      "purchase": false,
+      "purchase_date": "05/10/2020",
+      "car_make": "Cadillac",
+      "car_model": "DeVille",
+      "car_year": 1995
+    },
+    {
+      "id": 52,
+      "name": "Jo-anne Szwandt",
+      "dealership": 1,
+      "review": "Bad experience. They didnt tell me about an underlying issue with the engine",
+      "purchase": true,
+      "purchase_date": "01/26/2021",
+      "car_make": "Mercedes-Benz",
+      "car_model": "CL-Class",
+      "car_year": 1999
+    },
+    {
+      "id": 53,
+      "name": "Rupert Silberschatz",
+      "dealership": 3,
+      "review": "Great car and price!",
+      "purchase": true,
+      "purchase_date": "06/10/2020",
+      "car_make": "Saturn",
+      "car_model": "S-Series",
+      "car_year": 2001
+    },
+    {
+      "id": 54,
+      "name": "Lorilee Veasey",
+      "dealership": 4,
+      "review": "Great! Thank you team!",
+      "purchase": true,
+      "purchase_date": "02/08/2021",
+      "car_make": "Maybach",
+      "car_model": "57",
+      "car_year": 2012
     }
   ]
 }
