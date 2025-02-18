@@ -17,31 +17,7 @@ const SearchCars = () => {
   let dealer_url = `/djangoapp/get_inventory/${id}`;
 
   let fetch_url = `/djangoapp/dealer/${id}`;
-  
-  // Fetch dealer information from the backend
-  const fetchDealer = async ()=>{
-    const res = await fetch(fetch_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    if(retobj.status === 200) {
-      let dealer = retobj.dealer;
-      setDealer({"full_name":dealer[0].full_name})
-    }
-  }
-
-  // Function to extract unique makes and models from the fetched cars array
-  const populateMakesAndModels = (cars)=>{
-    let tmpmakes = []
-    let tmpmodels = []
-    cars.forEach((car)=>{
-      tmpmakes.push(car.make)
-      tmpmodels.push(car.model)
-    })
-    setMakes(Array.from(new Set(tmpmakes)));
-    setModels(Array.from(new Set(tmpmodels)));
-  }
-    
+      
   // Fetch all cars (inventory) for the dealer from the backend
   const fetchCars = async ()=>{
     const res = await fetch(dealer_url, {
@@ -56,73 +32,32 @@ const SearchCars = () => {
     }
   }
 
-  // Function to filter cars matching selected criteria based on various dropdowns. Only called after dropdown is selected
-  const setCarsmatchingCriteria = async(matching_cars)=>{
-    let cars = Array.from(matching_cars)
-    console.log("Number of matching cars "+cars.length);
+  // Function to extract unique makes and models from the fetched cars array
+  const populateMakesAndModels = (cars)=>{
+    let tmpmakes = []
+    let tmpmodels = []
+    cars.forEach((car)=>{
+      tmpmakes.push(car.make)
+      tmpmodels.push(car.model)
+    })
+    setMakes(Array.from(new Set(tmpmakes)));
+    setModels(Array.from(new Set(tmpmodels)));
+  }
 
-    // Get the selected indices from each filter dropdown
-    let makeIdx = document.getElementById('make').selectedIndex;
-    let modelIdx = document.getElementById('model').selectedIndex;
-    let yearIdx = document.getElementById('year').selectedIndex;
-    let mileageIdx = document.getElementById('mileage').selectedIndex;
-    let priceIdx = document.getElementById('price').selectedIndex;
-
-    // Filter by make, model, year, mileage or price only if a specific option in the dropdown is selected (index 0 is all)
-    if(makeIdx !== 0) {
-      let currmake = document.getElementById('make').value;
-      cars = cars.filter(car => car.make === currmake);
+  // Fetch dealer information from the backend
+  const fetchDealer = async ()=>{
+    const res = await fetch(fetch_url, {
+      method: "GET"
+    });
+    const retobj = await res.json();
+    if(retobj.status === 200) {
+      let dealer = retobj.dealer;
+      setDealer({"full_name":dealer[0].full_name})
     }
-    if(modelIdx !== 0) {
-      let currmodel = document.getElementById('model').value;
-      cars = cars.filter(car => car.model === currmodel);
-      if(cars.length !== 0) {
-        document.getElementById('make').value = cars[0].make;
-      }
-    }
-    if(yearIdx !== 0) {
-      let curryear = document.getElementById('year').value;
-      cars = cars.filter(car => car.year >= curryear);
-      if(cars.length !== 0) {
-        document.getElementById('make').value = cars[0].make;
-      }
-    }
-    if(mileageIdx !== 0) {
-      let currmileage = parseInt(document.getElementById('mileage').value);
-      if(currmileage === 50000) {
-        cars = cars.filter(car => car.mileage <= currmileage);
-      } else if (currmileage === 100000){
-        cars = cars.filter(car => car.mileage <= currmileage && car.mileage > 50000);
-      } else if (currmileage === 150000){
-        cars = cars.filter(car => car.mileage <= currmileage && car.mileage > 100000);
-      } else if (currmileage === 200000){
-        cars = cars.filter(car => car.mileage <= currmileage && car.mileage > 150000);
-      } else {
-        cars = cars.filter(car => car.mileage > 200000);
-      }
-    }
-    if(priceIdx !== 0) {
-      let currprice = parseInt(document.getElementById('price').value);
-      if(currprice === 20000) {
-        cars = cars.filter(car => car.price <= currprice);
-      } else if (currprice === 40000){
-        cars = cars.filter(car => car.price <= currprice && car.price > 20000);
-      } else if (currprice === 60000){
-        cars = cars.filter(car => car.price <= currprice && car.price > 40000);
-      } else if (currprice === 80000){
-        cars = cars.filter(car => car.price <= currprice && car.price > 60000);
-      } else {
-        cars = cars.filter(car => car.price > 80000);
-      }
-    }
-
-    if(cars.length === 0) {
-      setMessage("No cars found matching criteria");
-    }
-    setCars(cars);
   }
 
   // Function to search cars by make, triggered when the make dropdown changes
+  // MongoDB queried with condition
   let SearchCarsByMake = async ()=> {
     let make = document.getElementById("make").value;
     dealer_url = dealer_url + "?make="+make;
@@ -140,8 +75,8 @@ const SearchCars = () => {
       }
   }
 
-   // Function to search cars by model, triggered when the model dropdown changes
-   let SearchCarsByModel = async ()=> {
+  // Function to search cars by model, triggered when the model dropdown changes
+  let SearchCarsByModel = async ()=> {
     let model = document.getElementById("model").value;
     dealer_url = dealer_url + "?model="+model;
 
@@ -217,6 +152,72 @@ const SearchCars = () => {
       if(retobj.status === 200) {
         setCarsmatchingCriteria(retobj.cars);
       }
+  }
+
+  // Function to filter cars matching selected criteria based on various dropdowns. Only called after dropdown is selected
+  const setCarsmatchingCriteria = async(matching_cars)=>{
+    let cars = Array.from(matching_cars)
+    console.log("Number of matching cars "+cars.length);
+
+    // Get the selected indices from each filter dropdown
+    let makeIdx = document.getElementById('make').selectedIndex;
+    let modelIdx = document.getElementById('model').selectedIndex;
+    let yearIdx = document.getElementById('year').selectedIndex;
+    let mileageIdx = document.getElementById('mileage').selectedIndex;
+    let priceIdx = document.getElementById('price').selectedIndex;
+
+    // Filter by make, model, year, mileage or price only if a specific option in the dropdown is selected (index 0 is all)
+    if(makeIdx !== 0) {
+      let currmake = document.getElementById('make').value;
+      cars = cars.filter(car => car.make === currmake);
+    }
+    if(modelIdx !== 0) {
+      let currmodel = document.getElementById('model').value;
+      cars = cars.filter(car => car.model === currmodel);
+      if(cars.length !== 0) {
+        document.getElementById('make').value = cars[0].make;
+      }
+    }
+    if(yearIdx !== 0) {
+      let curryear = document.getElementById('year').value;
+      cars = cars.filter(car => car.year >= curryear);
+      if(cars.length !== 0) {
+        document.getElementById('make').value = cars[0].make;
+      }
+    }
+    if(mileageIdx !== 0) {
+      let currmileage = parseInt(document.getElementById('mileage').value);
+      if(currmileage === 50000) {
+        cars = cars.filter(car => car.mileage <= currmileage);
+      } else if (currmileage === 100000){
+        cars = cars.filter(car => car.mileage <= currmileage && car.mileage > 50000);
+      } else if (currmileage === 150000){
+        cars = cars.filter(car => car.mileage <= currmileage && car.mileage > 100000);
+      } else if (currmileage === 200000){
+        cars = cars.filter(car => car.mileage <= currmileage && car.mileage > 150000);
+      } else {
+        cars = cars.filter(car => car.mileage > 200000);
+      }
+    }
+    if(priceIdx !== 0) {
+      let currprice = parseInt(document.getElementById('price').value);
+      if(currprice === 20000) {
+        cars = cars.filter(car => car.price <= currprice);
+      } else if (currprice === 40000){
+        cars = cars.filter(car => car.price <= currprice && car.price > 20000);
+      } else if (currprice === 60000){
+        cars = cars.filter(car => car.price <= currprice && car.price > 40000);
+      } else if (currprice === 80000){
+        cars = cars.filter(car => car.price <= currprice && car.price > 60000);
+      } else {
+        cars = cars.filter(car => car.price > 80000);
+      }
+    }
+
+    if(cars.length === 0) {
+      setMessage("No cars found matching criteria");
+    }
+    setCars(cars);
   }
 
   // Reset function to clear all dropdown selections and fetch the full list of cars again

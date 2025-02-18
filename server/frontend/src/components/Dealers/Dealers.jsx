@@ -11,25 +11,8 @@ const Dealers = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [originalDealers, setOriginalDealers] = useState([]);
 
-
-  // let root_url = window.location.origin
   let dealer_url ="/djangoapp/get_dealers";
   
-  let dealer_url_by_state = "/djangoapp/get_dealers/";
- 
-  // Function to fetch and filter dealers by a specific state
-  const filterDealers = async (state) => {
-    dealer_url_by_state = dealer_url_by_state+state;
-    const res = await fetch(dealer_url_by_state, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    if(retobj.status === 200) {
-      let state_dealers = Array.from(retobj.dealers)
-      setDealersList(state_dealers)
-    }
-  }
-
   // Function to fetch all dealers from the backend API
   const get_dealers = async ()=>{
     const res = await fetch(dealer_url, {
